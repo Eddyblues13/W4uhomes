@@ -1,63 +1,109 @@
-// Get DOM elements
-const menuToggle = document.getElementById('menuToggle');
-const closeMenu = document.getElementById('closeMenu');
-const sidebar = document.getElementById('sidebar');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-const body = document.body;
+// js/script.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Get DOM elements
+    const hamburger = document.getElementById('hamburger');
+    const closeBtn = document.getElementById('closeBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const menuToggles = document.querySelectorAll('.menu-toggle');
 
-// Function to open sidebar
-function openSidebar() {
-    sidebar.classList.add('active');
-    sidebarOverlay.classList.add('active');
-    body.classList.add('sidebar-open');
-}
-
-// Function to close sidebar
-function closeSidebar() {
-    sidebar.classList.remove('active');
-    sidebarOverlay.classList.remove('active');
-    body.classList.remove('sidebar-open');
-}
-
-// Event listeners
-menuToggle.addEventListener('click', openSidebar);
-closeMenu.addEventListener('click', closeSidebar);
-sidebarOverlay.addEventListener('click', closeSidebar);
-
-// Close sidebar when clicking on a submenu item
-const submenuItems = document.querySelectorAll('.submenu-item');
-submenuItems.forEach(item => {
-    item.addEventListener('click', closeSidebar);
-});
-
-// Handle menu button collapse icons
-const menuButtons = document.querySelectorAll('.menu-button[data-bs-toggle="collapse"]');
-menuButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
-    });
-});
-
-// Close sidebar on escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && sidebar.classList.contains('active')) {
-        closeSidebar();
+    // Function to open sidebar
+    function openSidebar() {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+        hamburger.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
-});
 
-// Prevent body scroll when sidebar is open
-sidebar.addEventListener('touchmove', function(event) {
-    event.stopPropagation();
-}, { passive: false });
+    // Function to close sidebar
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+        hamburger.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Close all submenus when closing sidebar
+        document.querySelectorAll('.submenu').forEach(submenu => {
+            submenu.classList.remove('active');
+        });
+        
+        // Reset arrows
+        document.querySelectorAll('.arrow').forEach(arrow => {
+            arrow.style.transform = 'rotate(0deg)';
+        });
+    }
 
-// Handle window resize
-let resizeTimer;
-window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
-        if (window.innerWidth > 992 && sidebar.classList.contains('active')) {
+    // Toggle submenus
+    function toggleSubmenu(button) {
+        const submenu = button.nextElementSibling;
+        const arrow = button.querySelector('.arrow');
+        
+        if (submenu && submenu.classList.contains('submenu')) {
+            const isActive = submenu.classList.contains('active');
+            
+            // Close all other submenus
+            document.querySelectorAll('.submenu').forEach(menu => {
+                menu.classList.remove('active');
+            });
+            
+            // Reset all arrows
+            document.querySelectorAll('.arrow').forEach(arr => {
+                arr.style.transform = 'rotate(0deg)';
+            });
+            
+            // Toggle current submenu
+            if (!isActive) {
+                submenu.classList.add('active');
+                arrow.style.transform = 'rotate(90deg)';
+            }
+        }
+    }
+
+    // Event listeners
+    if (hamburger) {
+        hamburger.addEventListener('click', openSidebar);
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeSidebar);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeSidebar);
+    }
+
+    // Menu toggle event listeners
+    menuToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            // If it's a link, don't prevent default
+            if (this.getAttribute('href')) {
+                return;
+            }
+            e.preventDefault();
+            toggleSubmenu(this);
+        });
+    });
+
+    // Close sidebar on escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && sidebar.classList.contains('active')) {
             closeSidebar();
         }
-    }, 250);
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 991) {
+            closeSidebar();
+        }
+    });
+
+    // Close sidebar when clicking on links (for mobile)
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 991) {
+                closeSidebar();
+            }
+        });
+    });
 });

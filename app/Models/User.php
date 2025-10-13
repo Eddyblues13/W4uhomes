@@ -18,8 +18,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'email',
         'phone',
         'password',
@@ -59,6 +58,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Address::class);
     }
-
-
 }

@@ -330,7 +330,7 @@
                                 style="width: 200px; height: 200px; object-fit: cover;">
                         </div>
                         <h4 class="agent-name">Lewis Morgan</h4>
-                        <p class="agent-location text-muted">Chicago, IL</p>
+                        <p class="agent-location text-muted">Florida</p>
                         <div class="agent-contact">
                             <p class="agent-phone">
                                 <i class="fas fa-phone"></i> +1 (510) 368-3855

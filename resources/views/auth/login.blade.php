@@ -21,6 +21,12 @@
           </div>
           @endif
 
+          @if(session('status'))
+          <div class="alert alert-success">
+            {{ session('status') }}
+          </div>
+          @endif
+
           <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-3">
@@ -48,6 +54,12 @@
 
             <button type="submit" class="btn btn-primary w-100 btn-lg">Sign In</button>
           </form>
+
+          <div class="text-center mt-3">
+            <p class="mb-0">
+              <a href="{{ route('password.request') }}" class="text-decoration-none">Forgot your password?</a>
+            </p>
+          </div>
 
           <div class="text-center mt-4">
             <p class="mb-0">Don't have an account?

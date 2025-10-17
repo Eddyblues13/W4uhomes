@@ -494,12 +494,12 @@
             const icons = {
                 'bought': '🏠',
                 'rented': '🔑', 
-                'sold': '💰'
+                'sold': '💰'  
             };
             
             content.innerHTML = `
-                <strong>${testimonial.name}</strong> just ${testimonial.transaction_type} a home!<br>
-                ${icons[testimonial.transaction_type]} ${testimonial.formatted_amount}<br>
+                <strong>${testimonial.name} from ${testimonial.country}</strong> just ${testimonial.transaction_type} a home!<br>
+                ${icons[testimonial.transaction_type]} $${testimonial.amount}<br>
                 <small>"${testimonial.testimonial}"</small>
             `;
             

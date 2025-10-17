@@ -57,4 +57,10 @@ class HomeController extends Controller
         // Here you would typically send an email
         return redirect()->back()->with('success', 'Thank you for your message! We will get back to you soon.');
     }
+
+
+    public function form()
+    {
+        return view('home.form');
+    }
 }

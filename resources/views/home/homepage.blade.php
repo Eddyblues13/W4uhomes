@@ -314,6 +314,157 @@
         </div>
     </section>
 
+    <!-- Agents Section -->
+    <section class="agents-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Meet Our Expert Agents</h2>
+            <p class="section-subtitle text-center mb-5">Connect with our professional real estate agents for
+                personalized service</p>
+
+            <div class="row g-4">
+                <!-- Lewis Morgan - Chicago -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="agent-card text-center">
+                        <div class="agent-image mb-3">
+                            <img src="{{ asset('img/lewis.jpg') }}" alt="Lewis Morgan" class="img-fluid rounded-circle"
+                                style="width: 200px; height: 200px; object-fit: cover;">
+                        </div>
+                        <h4 class="agent-name">Lewis Morgan</h4>
+                        <p class="agent-location text-muted">Chicago, IL</p>
+                        <div class="agent-contact">
+                            <p class="agent-phone">
+                                <i class="fas fa-phone"></i> +1 (510) 368-3855
+                            </p>
+                            <p class="agent-email">
+                                <i class="fas fa-envelope"></i> lewismorgan0348@gmail.com
+                            </p>
+                        </div>
+                        <div class="agent-social mt-3">
+                            <a href="#" class="social-icon me-2">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-icon me-2">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- James Carter - Florida -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="agent-card text-center">
+                        <div class="agent-image mb-3">
+                            <img src="{{ asset('img/james.jpg') }}" alt="James Carter" class="img-fluid rounded-circle"
+                                style="width: 200px; height: 200px; object-fit: cover;">
+                        </div>
+                        <h4 class="agent-name">James Carter</h4>
+                        <p class="agent-location text-muted">Florida</p>
+                        <div class="agent-contact">
+                            <p class="agent-phone">
+                                <i class="fas fa-phone"></i> +1 (803) 801-9911
+                            </p>
+                            <p class="agent-email">
+                                <i class="fas fa-envelope"></i> jamcarter677@gmail.com
+                            </p>
+                        </div>
+                        <div class="agent-social mt-3">
+                            <a href="#" class="social-icon me-2">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-icon me-2">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- William J Morgan - Florida -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="agent-card text-center">
+                        <div class="agent-image mb-3">
+                            <img src="{{ asset('img/william.jpg') }}" alt="William J Morgan"
+                                class="img-fluid rounded-circle"
+                                style="width: 200px; height: 200px; object-fit: cover;">
+                        </div>
+                        <h4 class="agent-name">William J Morgan</h4>
+                        <p class="agent-location text-muted">Florida</p>
+                        <div class="agent-contact">
+                            <p class="agent-phone">
+                                <i class="fas fa-phone"></i> Contact via Email
+                            </p>
+                            <p class="agent-email">
+                                <i class="fas fa-envelope"></i> williamsjmorgan224@gmail.com
+                            </p>
+                        </div>
+                        <div class="agent-social mt-3">
+                            <a href="https://www.tiktok.com/@williamjmorgan1" target="_blank" class="social-icon me-2">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary btn-lg">Contact Our Team</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Contact Section -->
+    <section class="company-contact-section py-5" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title mb-4">W4UHomes Company</h2>
+                    <p class="section-subtitle mb-4">Your trusted partner in real estate</p>
+
+                    <div class="company-contact-info">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 mb-4">
+                                <div class="contact-item">
+                                    <i class="fab fa-whatsapp fa-2x text-primary mb-3"></i>
+                                    <h5>WhatsApp</h5>
+                                    <p class="contact-detail">+1 (270) 931-8101</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope fa-2x text-primary mb-3"></i>
+                                    <h5>Email</h5>
+                                    <p class="contact-detail">w4uhomes@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="company-social mt-4">
+                            <h5 class="mb-3">Follow Us</h5>
+                            <div class="social-links">
+                                <a href="https://www.tiktok.com/@w4uhomes" target="_blank" class="social-icon me-3">
+                                    <i class="fab fa-tiktok fa-2x"></i>
+                                </a>
+                                <a href="#" class="social-icon me-3">
+                                    <i class="fab fa-instagram fa-2x"></i>
+                                </a>
+                                <a href="#" class="social-icon me-3">
+                                    <i class="fab fa-facebook fa-2x"></i>
+                                </a>
+                                <a href="#" class="social-icon">
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="mt-5">
+                        <a href="{{ route('contact') }}" class="btn btn-primary btn-lg me-3">Contact Us</a>
+                        <a href="{{ route('about') }}" class="btn btn-outline-primary btn-lg">Learn More</a>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section class="recommendations-section">
         <div class="container">

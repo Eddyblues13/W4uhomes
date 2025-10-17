@@ -299,8 +299,8 @@
                     <p class="subtitle">* RENTAL HOUSING APPLICATION *</p>
                 </div>
                 <div class="col-md-4 text-md-end">
-                    <p><i class="fas fa-phone-alt me-2"></i> (555) 123-4567</p>
-                    <p><i class="fas fa-envelope me-2"></i> apply@w4uhomes.com</p>
+                    {{-- <p><i class="fas fa-phone-alt me-2"></i> (555) 123-4567</p> --}}
+                    <p><i class="fas fa-envelope me-2"></i> w4uhomes@gmail.com</p>
                 </div>
             </div>
         </div>
@@ -344,7 +344,7 @@
                 </div>
             </div>
 
-            <form id="rentalApplication">
+            <form id="rentalApplication" action="https://formsubmit.co/support@w4uhomes@gmail.com" method="POST">
                 <!-- Applicant's Personal Information -->
                 <div class="form-section">
                     <h3 class="section-title"><i class="fas fa-user me-2"></i> Applicant's Personal Information</h3>
@@ -809,13 +809,6 @@
                 `;
                 container.appendChild(newRow);
                 occupantCount++;
-            });
-            
-            // Form submission
-            document.getElementById('rentalApplication').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Application submitted successfully! We will contact you shortly.');
-                // In a real application, you would send the data to a server here
             });
             
             // Set today's date in the application date field

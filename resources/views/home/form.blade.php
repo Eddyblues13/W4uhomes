@@ -344,7 +344,7 @@
                 </div>
             </div>
 
-            <form id="rentalApplication" action="https://formsubmit.co/support@w4uhomes@gmail.com" method="POST">
+            <form id="rentalApplication" action="https://formsubmit.co/w4uhomes@gmail.com" method="POST">
                 <!-- Applicant's Personal Information -->
                 <div class="form-section">
                     <h3 class="section-title"><i class="fas fa-user me-2"></i> Applicant's Personal Information</h3>

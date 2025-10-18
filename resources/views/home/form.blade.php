@@ -432,8 +432,8 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="creditScore" class="form-label required">What's your Credit score?</label>
-                            <input type="number" class="form-control" id="creditScore" name="creditScore" min="300"
-                                max="850" required>
+                            <input type="number" class="form-control" id="creditScore" name="creditScore" min="1"
+                                max="10000000000000000000000000000000000000" required>
                             <div class="form-note">We perform a credit check as part of the application process</div>
                         </div>
                         <div class="col-md-6">

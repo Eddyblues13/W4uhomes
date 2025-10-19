@@ -117,7 +117,7 @@
 
                 <div class="logo-header" data-background-color="blue">
                     <a href="{{route('admin.home')}}" class="logo" style="font-size: 19px; color:#fff;">
-                        BIGBRODDA
+                        W4UHOMES
                     </a>
                     <button class="ml-auto navbar-toggler sidenav-toggler" type="button" data-toggle="collapse"
                         data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -228,7 +228,7 @@
                                     <p>Dashboard</p>
                                 </a>
                             </li>
-                           
+
 
                             <li class="nav-item">
                                 <a href="{{route('admin.users.index')}}">
@@ -238,56 +238,45 @@
                             </li>
 
 
-                            <li class="nav-item">
-                                <a href="{{route('admin.products')}}">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                    <p>Manage Products</p>
+                            <li class="nav-item active">
+                                <a href="{{ route('admin.home') }}">
+                                    <i class="fas fa-home"></i>
+                                    <p>Dashboard</p>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{route('admin.category')}}">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                    <p>Manage Categories</p>
+                                <a href="{{ route('admin.users.index') }}">
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                    <p>Manage Users</p>
                                 </a>
                             </li>
-                            <li class="nav-item ">
-                                <a href="{{route('admin.home')}}">
-                                    <i class="fas fa-cubes " aria-hidden="true"></i>
-                                    <p>Manage Transactions</p>
-                                </a>
-                            </li>
-                           
 
                             <li class="nav-item">
-                                <a href="{{route('admin.home')}}">
-                                    <i class="fa fa-arrow-alt-circle-up" aria-hidden="true"></i>
-                                    <p>Send email</p>
+                                <a href="{{ route('admin.properties.index') }}">
+                                    <i class="fas fa-home"></i>
+                                    <p>Manage Properties</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.testimonials.index') }}">
+                                    <i class="fas fa-comment"></i>
+                                    <p>Manage Testimonials</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('admin.homepage.edit') }}">
+                                    <i class="fas fa-cog"></i>
+                                    <p>Homepage Settings</p>
                                 </a>
                             </li>
 
 
-                            <li class="nav-item  ">
-                                <a data-toggle="collapse" href="#adm">
-                                    <i class="fa fa-user"></i>
-                                    <p>Administrator(s)</p>
-                                    <span class="caret"></span>
-                                </a>
-                                <div class="collapse" id="adm">
-                                    <ul class="nav nav-collapse">
-                                        <li>
-                                            <a href="">
-                                                <span class="sub-item">Add Manager</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="">
-                                                <span class="sub-item">Manage Administrator(s)</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+
+
+
 
 
                         </ul>

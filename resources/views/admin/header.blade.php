@@ -238,20 +238,6 @@
                             </li>
 
 
-                            <li class="nav-item active">
-                                <a href="{{ route('admin.home') }}">
-                                    <i class="fas fa-home"></i>
-                                    <p>Dashboard</p>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="{{ route('admin.users.index') }}">
-                                    <i class="fa fa-user-circle" aria-hidden="true"></i>
-                                    <p>Manage Users</p>
-                                </a>
-                            </li>
-
                             <li class="nav-item">
                                 <a href="{{ route('admin.properties.index') }}">
                                     <i class="fas fa-home"></i>

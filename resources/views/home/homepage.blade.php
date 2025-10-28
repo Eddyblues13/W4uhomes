@@ -276,7 +276,7 @@
                 @foreach($featuredProperties as $property)
                 <div class="col-lg-4 col-md-6">
                     <div class="card property-card-custom h-100">
-                        <img src="{{ $property->image ?? 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' }}"
+                        <img src="{{ $property->main_image_url ?? 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' }}"
                             class="card-img-top" alt="{{ $property->title }}" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">{{ $property->title }}</h5>
@@ -308,9 +308,9 @@
                 @endforeach
             </div>
 
-            <div class="text-center mt-4">
+            {{-- <div class="text-center mt-4">
                 <a href="{{ route('properties.index') }}" class="btn btn-outline-primary">View All Properties</a>
-            </div>
+            </div> --}}
         </div>
     </section>
 
@@ -326,7 +326,8 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="agent-card text-center">
                         <div class="agent-image mb-3">
-                            <img src="{{ asset('img/lewis.jpg') }}" alt="Lewis Morgan" class="img-fluid rounded-circle"
+                            <img src="{{ asset('images/agents/lewis.jpg') }}" alt="Lewis Morgan"
+                                class="img-fluid rounded-circle"
                                 style="width: 200px; height: 200px; object-fit: cover;">
                         </div>
                         <h4 class="agent-name">Lewis Morgan</h4>
@@ -354,7 +355,8 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="agent-card text-center">
                         <div class="agent-image mb-3">
-                            <img src="{{ asset('img/james.jpg') }}" alt="James Carter" class="img-fluid rounded-circle"
+                            <img src="{{ asset('images/agents/james.jpg') }}" alt="James Carter"
+                                class="img-fluid rounded-circle"
                                 style="width: 200px; height: 200px; object-fit: cover;">
                         </div>
                         <h4 class="agent-name">James Carter</h4>
@@ -382,7 +384,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="agent-card text-center">
                         <div class="agent-image mb-3">
-                            <img src="{{ asset('img/william.jpg') }}" alt="William J Morgan"
+                            <img src="{{ asset('images/agents/william.jpg') }}" alt="William J Morgan"
                                 class="img-fluid rounded-circle"
                                 style="width: 200px; height: 200px; object-fit: cover;">
                         </div>

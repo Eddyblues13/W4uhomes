@@ -21,12 +21,14 @@ class Property extends Model
         'bedrooms',
         'bathrooms',
         'square_feet',
+        'main_image',
         'images',
         'featured'
     ];
 
     protected $casts = [
-        'images' => 'array'
+        'images' => 'array',
+        'featured' => 'boolean'
     ];
 
     public function getFormattedPriceAttribute()
@@ -34,8 +36,44 @@ class Property extends Model
         return '$' . number_format($this->price);
     }
 
-    public function getImageAttribute()
+    // For public folder access
+    public function getMainImageUrlAttribute()
     {
-        return $this->images ? $this->images[0] : null;
+        if (!$this->main_image) {
+            return asset('images/default-property.jpg');
+        }
+
+        // For public folder - use direct asset path
+        return asset($this->main_image);
+    }
+
+    public function getImagesUrlsAttribute()
+    {
+        if (!$this->images || !is_array($this->images)) {
+            return [];
+        }
+
+        return array_map(function ($image) {
+            return asset($image);
+        }, $this->images);
+    }
+
+    public function getAllImagesUrlsAttribute()
+    {
+        $allImages = [];
+
+        if ($this->main_image) {
+            $allImages[] = $this->getMainImageUrlAttribute();
+        }
+
+        $carouselUrls = $this->getImagesUrlsAttribute();
+        foreach ($carouselUrls as $url) {
+            // Don't duplicate if main image is also in carousel
+            if ($this->main_image && asset($this->main_image) !== $url) {
+                $allImages[] = $url;
+            }
+        }
+
+        return $allImages;
     }
 }

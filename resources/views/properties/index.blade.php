@@ -78,7 +78,7 @@
         @forelse($properties as $property)
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card property-card-custom h-100">
-                <img src="{{ $property->image ?? 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' }}"
+                <img src="{{ $property->main_image_url ?? 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' }}"
                     class="card-img-top" alt="{{ $property->title }}" style="height: 250px; object-fit: cover;">
                 <div class="card-body">
                     <h5 class="card-title">{{ $property->title }}</h5>

@@ -59,7 +59,7 @@
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card property-card-custom h-100">
                 <div class="position-relative">
-                    <img src="{{ $property->image ?? 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1973&q=80' }}"
+                    <img src="{{ $property->main_image_url ?? 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1973&q=80' }}"
                         class="card-img-top" alt="{{ $property->title }}" style="height: 250px; object-fit: cover;">
                     <span class="position-absolute top-0 start-0 bg-secondary text-white px-3 py-1 m-2 rounded">
                         Sold

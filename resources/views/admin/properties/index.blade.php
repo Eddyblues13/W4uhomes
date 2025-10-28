@@ -28,11 +28,20 @@
                             </div>
                             @endif
 
+                            @if(session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
+
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
+                                            <th>Main Image</th>
                                             <th>Title</th>
                                             <th>Type</th>
                                             <th>Price</th>
@@ -46,9 +55,14 @@
                                         @foreach($properties as $property)
                                         <tr>
                                             <td>
-                                                <img src="{{ $property->image ?? 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80' }}"
+                                                @if($property->main_image)
+                                                <img src="{{ $property->main_image_url }}" alt="{{ $property->title }}"
+                                                    style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                                                @else
+                                                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
                                                     alt="{{ $property->title }}"
                                                     style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                                                @endif
                                             </td>
                                             <td>{{ Str::limit($property->title, 30) }}</td>
                                             <td>

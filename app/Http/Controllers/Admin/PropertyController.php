@@ -34,20 +34,30 @@ class PropertyController extends Controller
             'bedrooms' => 'required|integer|min:0',
             'bathrooms' => 'required|integer|min:0',
             'square_feet' => 'required|integer|min:0',
+            'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'featured' => 'boolean',
         ]);
 
-        $data = $request->except('images');
+        $data = $request->except(['images', 'main_image']);
         $data['featured'] = $request->has('featured');
 
-        // Handle image uploads
+        // Handle main image upload to public folder
+        if ($request->hasFile('main_image')) {
+            $mainImage = $request->file('main_image');
+            $mainImageName = time() . '_main_' . $mainImage->getClientOriginalName();
+            $mainImage->move(public_path('images/properties'), $mainImageName);
+            $data['main_image'] = 'images/properties/' . $mainImageName;
+        }
+
+        // Handle carousel images upload to public folder
         if ($request->hasFile('images')) {
             $imagePaths = [];
             foreach ($request->file('images') as $image) {
-                $path = $image->store('properties', 'public');
-                $imagePaths[] = $path;
+                $imageName = time() . '_' . uniqid() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images/properties'), $imageName);
+                $imagePaths[] = 'images/properties/' . $imageName;
             }
             $data['images'] = $imagePaths;
         }
@@ -76,30 +86,73 @@ class PropertyController extends Controller
             'bedrooms' => 'required|integer|min:0',
             'bathrooms' => 'required|integer|min:0',
             'square_feet' => 'required|integer|min:0',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'featured' => 'boolean',
         ]);
 
-        $data = $request->except('images');
+        $data = $request->except(['images', 'main_image', 'remove_main_image', 'remove_images']);
         $data['featured'] = $request->has('featured');
 
-        // Handle image uploads
-        if ($request->hasFile('images')) {
-            // Delete old images
-            if ($property->images) {
-                foreach ($property->images as $oldImage) {
-                    Storage::disk('public')->delete($oldImage);
-                }
+        // Handle main image
+        if ($request->has('remove_main_image')) {
+            // Remove main image from public folder
+            if ($property->main_image && file_exists(public_path($property->main_image))) {
+                unlink(public_path($property->main_image));
+            }
+            $data['main_image'] = null;
+        } elseif ($request->hasFile('main_image')) {
+            // Update main image
+            if ($property->main_image && file_exists(public_path($property->main_image))) {
+                unlink(public_path($property->main_image));
             }
 
-            $imagePaths = [];
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('properties', 'public');
-                $imagePaths[] = $path;
-            }
-            $data['images'] = $imagePaths;
+            $mainImage = $request->file('main_image');
+            $mainImageName = time() . '_main_' . $mainImage->getClientOriginalName();
+            $mainImage->move(public_path('images/properties'), $mainImageName);
+            $data['main_image'] = 'images/properties/' . $mainImageName;
         }
+
+        // Handle carousel images
+        $currentImages = $property->images ?? [];
+
+        // Remove selected images
+        if ($request->has('remove_images')) {
+            foreach ($request->remove_images as $index) {
+                if (isset($currentImages[$index])) {
+                    if (file_exists(public_path($currentImages[$index]))) {
+                        unlink(public_path($currentImages[$index]));
+                    }
+                    unset($currentImages[$index]);
+                }
+            }
+            $currentImages = array_values($currentImages); // Reindex array
+        }
+
+        // Remove selected images
+        // if ($request->has('remove_images')) {
+        //     foreach ($request->remove_images as $index) {
+        //         if (isset($currentImages[$index])) {
+        //             if (file_exists(public_path($currentImages[$index]))) {
+        //                 unlink(public_path($currentImages[$index]));
+        //             }
+        //             unset($currentImages[$index]);
+        //         }
+        //     }
+        //     $currentImages = array_values($currentImages); // Reindex array
+        // }
+
+        // Add new images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . uniqid() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images/properties'), $imageName);
+                $currentImages[] = 'images/properties/' . $imageName;
+            }
+        }
+
+        $data['images'] = $currentImages;
 
         $property->update($data);
 
@@ -108,15 +161,35 @@ class PropertyController extends Controller
 
     public function destroy(Property $property)
     {
-        // Delete images
+        // Delete main image from public folder
+        if ($property->main_image && file_exists(public_path($property->main_image))) {
+            unlink(public_path($property->main_image));
+        }
+
+        // Delete carousel images from public folder
         if ($property->images) {
             foreach ($property->images as $image) {
-                Storage::disk('public')->delete($image);
+                if (file_exists(public_path($image))) {
+                    unlink(public_path($image));
+                }
             }
         }
 
         $property->delete();
 
         return redirect()->route('admin.properties.index')->with('success', 'Property deleted successfully.');
+    }
+
+    /**
+     * Toggle featured status
+     */
+    public function toggleFeatured(Property $property)
+    {
+        $property->update([
+            'featured' => !$property->featured
+        ]);
+
+        $status = $property->featured ? 'featured' : 'unfeatured';
+        return redirect()->back()->with('success', "Property {$status} successfully.");
     }
 }
